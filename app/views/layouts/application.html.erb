@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>LifluidApp</title>
+    <title>Lifluid</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +11,96 @@
   </head>
 
   <body>
+    <div id="top_panel">
+      <a href="#" style="margin-left: 15px">
+        <%= image_tag('lifluid logo.png',alt: "logo",id:'logo') %>
+      </a>
+      <ul class="nav_list">
+        <li><a href="/users/index">Home</a></li>
+        <li><a href="#">Admin</a></li>
+        <li><a href="/users/contact">Contact</a></li>
+      </ul>
+      <div class="profile">
+        <p><% user= session[:user_id]%></p>
+        <% if session[:user_id]  %>
+          <div class='user-name-div'>
+          <div  class='user-name'>
+            <p><%= user["name"].capitalize %></p>
+          </div>
+          </div>
+          <% d_record = Donor.all %>
+          <% for donor in 0...d_record.length do%>
+            <% if d_record[donor].user_id == user['id'] %>
+              <div class='user-role'>
+                <p class='donor'>Donor</p>
+              </div>
+            <% end %>
+          <% end %>
+          <%b_record = BloodBank.all %>
+          <% for bloodbank in 0...b_record.length do%>
+            <% if b_record[bloodbank].user_id == user['id'] %>
+              <div class='user-role'>
+                <p class='donor'>Blood Bank</p>
+              </div>
+            <% end %>
+          <% end %>
+          <div class="dropdown-menu">
+            <%= image_tag('avatar.png', alt: 'profile-avatar', id: 'profile-avatar',class: 'menu-btn') %>
+            <div class="menu-content">
+              <% for donor in 0...d_record.length do%>
+                <% if d_record[donor].user_id == user['id'] %>
+                  <% @presence = true%>
+                  <% break%>
+                  <% else %>
+                  <% @presence = false %> 
+                <% end %>
+              <% end %>
+                <% if @presence==true %>
+                  <ul>
+                    <li>
+                      <a href="#">Account</a>
+                    </li>
+                    <%# <li>
+                    <a href="/blood_bank/register_blood_bank">Register Blood Bank</a>
+                    </li> %>
+                    <li>
+                      <a href="/donors/donor_register">Be a Donor</a>
+                    </li>
+                    <li>
+                      <a href="/users/destroy">Logout</a>
+                    </li>
+                  </ul>
+                <% end %>
+                <% for bloodbank in 0...b_record.length do%>
+                  <% if b_record[bloodbank].user_id == user['id'] %>
+                    <% @bank_presence = true%>
+                    <% break%>
+                  <% end %>
+                <% end %>
+                <% if @bank_presence==true %>
+                  <ul>
+                    <li>
+                      <a href="#">Account</a>
+                    </li>
+                    <li>
+                    <a href="/blood_bank/register_blood_bank">Register Blood Bank</a>
+                    </li>
+                    <li>
+                      <a href="/blood_bank/requests">Blood Requests</a>
+                    </li>
+                    <li>
+                      <a href="/users/destroy">Logout</a>
+                    </li>
+                  </ul>
+                <% end %>
+            </div>
+          </div>
+        <% else %>
+          <a href="/login"><button class='login-btn'>Login</button></a>
+        <% end %>
+      </div>
+    </div>
     <%= yield %>
+    <%= javascript_pack_tag 'profile-dropdown.js'%>
   </body>
 </html>

@@ -2,7 +2,7 @@
 
 #### HEROKU LINK
 
-*
+* https://lifluid-finalproject.herokuapp.com/
 
 #### SONARCLOUD LINK
 

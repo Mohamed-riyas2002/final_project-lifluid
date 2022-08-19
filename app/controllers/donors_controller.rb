@@ -30,6 +30,8 @@ class DonorsController < ApplicationController
     if request.save
       MailRequestClaimedMailer.with(user: session[:user_id], r_record: request).request_claimed.deliver_now
       redirect_to root_path
+    else
+      redirect_to "/login"
     end
   end
 

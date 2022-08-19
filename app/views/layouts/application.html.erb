@@ -55,59 +55,62 @@
                   <% @presence = false %> 
                 <% end %>
               <% end %>
-                <% if @presence==true %>
-                  <ul>
-                    <li>
-                      <a href="#">Account</a>
-                    </li>
-                    <%# <li>
-                    <a href="/blood_bank/register_blood_bank">Register Blood Bank</a>
-                    </li> %>
-                    <li>
-                      <a href="/donors/donor_register">Be a Donor</a>
-                    </li>
-                    <li>
-                      <a href="/users/destroy">Logout</a>
-                    </li>
-                  </ul>
+              <% if @presence==true %>
+                <ul>
+                  <li>
+                    <a href="#">Account</a>
+                  </li>
+                  <%# <li>
+                  <a href="/blood_bank/register_blood_bank">Register Blood Bank</a>
+                  </li> %>
+                  <li>
+                    <a href="/donors/donor_register">Be a Donor</a>
+                  </li>
+                  <li>
+                    <a href="/users/destroy">Logout</a>
+                  </li>
+                </ul>
+              <% end %>
+              <% for bloodbank in 0...b_record.length do%>
+                <% if b_record[bloodbank].user_id == user['id'] %>
+                  <% @bank_presence = true%>
+                  <% break%>
                 <% end %>
-                <% for bloodbank in 0...b_record.length do%>
-                  <% if b_record[bloodbank].user_id == user['id'] %>
-                    <% @bank_presence = true%>
-                    <% break%>
-                  <% end %>
-                <% end %>
-                <% if @bank_presence==true %>
+              <% end %>
+              <% if @bank_presence==true %>
+                <ul>
+                  <li>
+                    <a href="#">Account</a>
+                  </li>
+                  <li>
+                  <a href="/blood_bank/register_blood_bank">Register Blood Bank</a>
+                  </li>
+                  <li>
+                    <a href="/blood_bank/requests">Blood Requests</a>
+                  </li>
+                  <li>
+                    <a href="/users/destroy">Logout</a>
+                  </li>
+                </ul>
+              <% end %>
+<% find_donor = Donor.all.where(user_id: user['id'])%>
+<% find_blood_bank  = BloodBank.all.where(user_id: user['id']) %>
+<% if find_blood_bank.length == 0  and find_donor.length == 0 %>
                   <ul>
-                    <li>
-                      <a href="#">Account</a>
-                    </li>
-                    <li>
-                    <a href="/blood_bank/register_blood_bank">Register Blood Bank</a>
-                    </li>
-                    <li>
-                      <a href="/blood_bank/requests">Blood Requests</a>
-                    </li>
-                    <li>
-                      <a href="/users/destroy">Logout</a>
-                    </li>
-                  </ul>
-                <% else %>
-                  <ul>
-                    <li>
-                      <a href="#">Account</a>
-                    </li>
-                    <li>
-                    <a href="/blood_bank/register_blood_bank">Register Blood Bank</a>
-                    </li>
-                    <li>
-                      <a href="/donors/donor_register">Be a donor</a>
-                    </li>
-                    <li>
-                      <a href="/users/destroy">Logout</a>
-                    </li>
-                  </ul>
-                <% end %>
+                  <li>
+                    <a href="#">Account</a>
+                  </li>
+                  <li>
+                  <a href="/blood_bank/register_blood_bank">Register Blood Bank</a>
+                  </li>
+                  <li>
+                    <a href="/donors/donor_register">Be a Donor</a>
+                  </li>
+                  <li>
+                    <a href="/users/destroy">Logout</a>
+                  </li>
+                </ul>
+<% end%>
             </div>
           </div>
         <% else %>

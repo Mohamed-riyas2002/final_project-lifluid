@@ -8,6 +8,10 @@
 
 * https://sonarcloud.io/summary/overall?id=Mohamed-riyas2002_final_project-lifluid
 
+#### Presentation Link
+
+* https://www.canva.com/design/DAFJkDV9RAE/xyVrduvlxHgKywry3EccOA/edit?utm_content=DAFJkDV9RAE&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+
 #### FEATURES
 
 * Register
